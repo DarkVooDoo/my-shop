@@ -1,0 +1,99 @@
+{{define "Head"}}
+    <title>Compte</title>
+
+    <style>
+        .user{
+            display: flex;
+            gap: .5rem;
+            margin-block: .5rem;
+            .name{
+                font-size: 1.1rem;
+            }
+            .picture{
+                width: 5rem;
+                border-radius: 50%;
+            }
+            .proBtn{
+                margin-top: .3rem;
+                height: 2rem;
+                padding-inline: 1rem;
+                border-radius: 5px;
+                font-weight: bold;
+                color: white;
+                background-color: var(--primary-color);
+            }
+        }
+        .field{
+            margin-bottom: .5rem;
+            .label{
+                display: block;
+                font-weight: bold;
+                margin-bottom: .3rem;
+            }
+            .input{
+                width: 100%;
+                height: 2rem;
+                border-radius: 5px;
+                padding-inline: 5px;
+                border: 1px solid var(--border-color);
+            }
+        }
+        .addr{
+            display: flex;
+            gap: .5rem;
+            .addr-field{
+                width: calc(100% - 5rem);
+            }
+            .postal-field{
+                width: 5rem;
+            }
+        }
+        .submitBtn{
+            height: 2.5rem;
+            padding-inline: 1rem;
+            border-radius: 5px;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+{{end}}
+
+{{define "Body"}}
+    <div class="user">
+        <img src="/static/star.svg" class="picture" />
+        <div>
+            <h1 class="name">John Doe</h1>
+            <p>johndoe@test.com</p>
+            <button type="button" class="proBtn">Pro</button>
+        </div>
+    </div>
+    <form>
+
+        <div class="field">
+            <label class="label" for="lastname">Nom</label>
+            <input type="text" name="lastname" id="lastname" class="input" />
+        </div>
+        <div class="field">
+            <label class="label" for="firstname">Prenom</label>
+            <input type="text" name="firstname" id="firstname" class="input" />
+        </div>
+        <div class="field">
+            <label class="label" for="phone">Telephon</label>
+            <input type="text" name="phone" id="phone" class="input" />
+        </div>
+        <div class="addr">
+            <div class="field addr-field">
+                <label class="label" for="addr">Adresse</label>
+                <input type="text" name="adresse" id="addr" class="input"/>
+            </div>
+            <div class="field postal-field">
+                <label class="label" for="postal">Postal</label>
+                <input type="number" id="postal" name="postal" class="input" />
+            </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;">
+            <button type="submit" class="submitBtn">Sauvegarder</button>
+        </div>
+    </form>
+{{end}}

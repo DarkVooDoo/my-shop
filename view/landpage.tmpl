@@ -1,0 +1,62 @@
+{{define "Head"}}
+
+    <title>Mota</title>
+    <link href="/static/appointment.css" rel="stylesheet" />
+    <style>
+        .etablishment_card{
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 10px;
+            .content{
+                display: flex;
+                gap: .5rem;
+                align-items: center;
+                .categoryIcon{
+                    height: 2.5rem;
+                    aspect-ratio: 1/1;
+                }
+                .name{
+                    font-size: 1.1rem;
+                }
+                .rating{
+                    display: flex;
+                    gap: .3rem;
+                    .star{
+                        height: 1.5rem;
+                        aspect-ratio: 1/1;
+                    }
+                }
+            }
+            .metadata{
+                display: flex;
+                gap: .5rem;
+                margin-bottom: .5rem;
+                .icon{
+                    height: 1.3rem;
+                    aspect-ratio: 1/1;
+                }
+            }
+            .rdv{
+                display: flex;
+                justify-content: center;
+                .btn{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding-inline: 1rem;
+                    font-weight: bold;
+                    color: white;
+                    background-color: var(--primary-color);
+                    border-radius: 5px;
+                    height: 2rem;
+                }
+            }
+        }
+    </style>
+{{end}}
+
+{{define "Body"}}
+    
+    {{template "AppointmentCard" .}}
+    {{template "EtablishmentCard" .}}
+{{end}}

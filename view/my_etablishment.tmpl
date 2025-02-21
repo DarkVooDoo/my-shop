@@ -1,0 +1,62 @@
+{{define "Head"}}
+    <title>Ay mi amigo</title>
+    <style>
+        .my-etablishment{
+            .header{
+                display: flex;
+                justify-content: space-between;
+                margin-block: .5rem;
+                .chose-etablishment{
+                    line-height: 2rem;
+                    border-radius: 5px;
+                    padding-inline: .5rem;
+                    border: 1px solid var(--border-color);
+                }
+                .btn{
+                    line-height: 2rem;
+                    border-radius: 5px;
+                    background-color: var(--primary-color);
+                    color: white;
+                    font-weight: bold;
+                    padding-inline: 1rem;
+                }
+            }
+            .navigation{
+                .btn{
+                    line-height: 1.5rem;
+                    border-radius: 5px;
+                    border: 1px solid var(--primary-color);
+                    margin-right: 1rem;
+                }
+            }
+        }
+    </style>
+{{end}}
+
+
+{{define "Body"}}
+    <div class="my-etablishment">
+        <div class="header">
+            <select class="chose-etablishment" onchange="onEtablishmentChange(this)">
+                <option value="2">L.A.K 18arr</option>
+                <option value="3"> L.A.K 16arr</option>
+            </select>
+            <button type="button" class="btn">Nouveau</button>
+        </div>
+        <div class="navigation">
+            <button type="button" class="btn">Dashboard</button>
+            <button type="button" class="btn">Employee</button>
+            <button type="button" class="btn">Horaire</button>
+            <button type="button" class="btn">Planning</button>
+        </div>
+        <div id="content">
+
+        </div>
+    </div>
+
+    <script>
+        const onEtablishmentChange = (ele)=>{
+            window.location.href = `/etablissement/${ele.value}`
+        }
+    </script>
+{{end}}

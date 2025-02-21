@@ -1,0 +1,73 @@
+{{define "Head"}}
+    <title>Etablishment name</title>
+    <link href="/static/etablishment.css" rel="stylesheet" />
+{{end}}
+
+{{define "Body"}}
+    <div class="etablishment">
+        <div class="photo"></div>
+        <div>
+            <h1 class="name">L.A.K</h1>
+            <p>Coiffeur</p>
+            <div class="metadata">
+                <img src="/static/location.svg" class="icon" />
+                <p>7 Avenue Victor Hugo, 75016 Paris</p>
+            </div>
+            <div class="metadata">
+                <img src="/static/telephone.svg" class="icon" />
+                <p>0644954432</p>
+            </div>
+            <div class="rating">
+                <img src="/static/starfill.svg" class="star" />
+                <img src="/static/starfill.svg" class="star" />
+                <img src="/static/starfill.svg" class="star" />
+                <img src="/static/star.svg" class="star" />
+                <img src="/static/star.svg" class="star" />
+            </div>
+            <a class="btn" href="/etablissement/4/rendez-vous">Rendez-vous</a>
+        </div>
+    </div>
+    <details class="service">
+        <summary>
+            <span>Prestation</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow_up"><polyline points="18 15 12 9 6 15"></polyline></svg>
+        </summary>
+        <ul class="list">
+            <li class="info">Coiffeur 20£</li>
+            <li class="info">Coiffeur + Barbe 25£</li>
+        </ul>
+    </details>
+    <details class="service">
+        <summary>
+            <span>Horaire</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow_up"><polyline points="18 15 12 9 6 15"></polyline></svg>
+        </summary>
+        <ul class="list">
+            <li class="info">Lundi: 9h00 - 17h00</li>
+            <li class="info">Mardi: 9h00 - 17h00</li>
+            <li class="info">Mercredi: 9h00 - 17h00</li>
+        </ul>
+    </details>
+    <h1 class="section_name">Photos</h1>
+    <div class="galery">
+        <button type="button" class="btn"><img src="/static/star.svg" class="photo" /></button>
+    </div>
+    <h1 class="section_name">Avis</h1>
+    <div class="review">
+        <div class="user">
+            <h1 class="name">John Doe</h1>
+            <p class="date">22/04/2022</p>
+        </div>
+        <div class="rating">
+            <img src="/static/starfill.svg" class="star" />
+            <img src="/static/starfill.svg" class="star" />
+            <img src="/static/starfill.svg" class="star" />
+            <img src="/static/star.svg" class="star" />
+            <img src="/static/star.svg" class="star" />
+        </div>
+        <p>Lorem dolor sit amet, consectetur adipiscing
+ elit. Morbi fermentum dignissim metus et congue. 
+Aliquam pellentesque luctus consequat. </p>
+    </div>
+
+{{end}}

@@ -1,0 +1,151 @@
+{{define "Head"}}
+    <title>Nouveau</title>
+
+    <style>
+        #appointment{
+            .header{
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+            .user{
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+                margin-bottom: .5rem;
+                .name{
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    .radioBtn{
+                        float: right;
+                    }
+                }
+                .photo{
+                    width: 2rem;
+                    aspect-ratio: 1/1;
+                    border-radius: 50%;
+                }
+                .btn{
+                    padding: .5rem 2rem;
+                    border-radius: 5px;
+                    background-color: var(--primary-color);
+                    color: white;
+                    font-weight: bold;
+                }
+            }
+            .service{
+                display: flex;
+                gap: .5rem;
+                border: 1px solid var(--border-color);
+                border-radius: 5px;
+                padding: 5px;
+                margin-bottom: .5rem;
+                .name{
+                    width: 100%;
+                    .price{
+                        color: var(--primary-color);
+                        float: right;
+                    }
+                }
+            }
+            .date{
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+                margin-bottom: .5rem;
+                #date{
+                    height: 2rem;
+                    border: 1px solid var(--border-color);
+                    border-radius: 5px;
+                    padding-inline: 5px;
+                }
+            }
+
+            .btn{
+                padding: .5rem 2rem;
+                background-color: var(--primary-color);
+                border-radius: 5px;
+                color: white;
+                font-weight: bold;
+                display: inline-block;
+                width: 100%;
+            }
+            #time{
+                margin-bottom: .5rem;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                justify-content: space-between;
+                gap: .7rem;
+                .btn{
+                    padding-inline: 1rem;
+                    background-color: black;
+                    color: white;
+                    &:disabled{
+                        color: gray;
+                        background-color: var(--border-color);
+                    }
+                }
+            }
+        }
+    </style>
+{{end}}
+
+{{define "Body"}}
+    <form id="appointment" hx-post="/etablissement/4/rendez-vous" hx-ext="json-enc" hx-swap="none" hx-vals='js:{...getServices()}'>
+        <h1  class="header">Rendez-vous</h1>
+        <div class="user">
+            <img src="/static/location.svg" class="photo" />
+            <p class="name">John Doe <input type="radio" class="radioBtn" name="employee" value="33" checked hx-put="/etablissement/4/rendez-vous" hx-swap="innerHTML" hx-target="#time" hx-ext="json-enc" hx-include="[name='date']" /></p>
+        </div>
+        <div class="user">
+            <img src="/static/location.svg" class="photo" />
+            <p class="name">Alice Test <input type="radio" class="radioBtn" name="employee" value="52" hx-put="/etablissement/4/rendez-vous" hx-swap="innerHTML" hx-target="#time" hx-ext="json-enc" hx-include="[name='date']" /></p>
+        </div>
+        <div class="service">
+            <input type="checkbox" id="42" class="service-value" value="42" />
+            <label for="42" class="name">Coupe <b class="price">20£</b></label>
+        </div>
+        <div class="service">
+            <input type="checkbox" id="45" class="service-value" name="service" value="45" />
+            <label for="45" class="name">Coupe + Barbe <b class="price">25£</b></label>
+        </div>
+        <div class="date">
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" hx-put="/etablissement/4/rendez-vous" hx-target="#time" hx-swap="innerHTML" hx-ext="json-enc" hx-include="[name='employee']" />
+        </div>
+        <div id="time">
+            
+        </div>
+        <button type="submit" class="btn">Confirmer</button>
+    </form>
+
+    <script>
+        
+        const services = document.querySelectorAll(".service-value")
+
+        const onTimePick = (ele)=>{
+            const times = document.querySelectorAll('[name="time"]')
+            let state
+            if(ele.nextSibling.disabled || ele.previousSibling.disabled){
+                state = false
+            }else{
+                state = true
+            }
+            for (const time of times){
+                time.disabled = state
+            }
+            ele.disabled = false
+        }
+
+        const getServices = ()=>{
+            const time = document.querySelector('#time button:not([disabled])')
+            if (!time) return
+            const serviceChosen = []
+            for(const service of services){
+                if (!service.checked) continue
+                serviceChosen.push(service.value)
+            }
+            return {service: serviceChosen, time: time.innerHTML}
+        }
+    </script>
+{{end}}

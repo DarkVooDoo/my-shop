@@ -1,0 +1,109 @@
+.etablishment{
+    display: flex;
+    gap: .5rem;
+    margin-block: .5rem;
+    .name{
+        font-size: 1.1rem;
+    }
+    .photo{
+        width: 80px;
+        aspect-ratio: 1/1.5;
+        border-radius: 10px;
+        background-color: gray;
+    }
+    .metadata{
+        display: flex;
+        gap: .3rem;
+        .icon{
+            height: 1.5rem;
+            aspect-ratio: 1/1;
+        }
+    }
+    .rating{
+        display: flex;
+        gap: .3rem;
+        .star{
+            height: 1.5rem;
+        }
+    }
+    .btn{
+        padding: .5rem 2rem;
+        background-color: var(--primary-color);
+        border-radius: 5px;
+        color: white;
+        font-weight: bold;
+        display: inline-block;
+    }
+}
+.service{
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: .5rem;
+    &[open]  .arrow_up{
+        transform: rotate(180deg);
+    }
+    .info{
+        line-height: 2rem;
+    }
+    .arrow_up{
+        transition: all .2s linear;
+        position: absolute;
+        top: -3px;
+        right: 5px;
+    }
+    summary{
+        position: relative;
+		list-style: none;
+        ::-webkit-details-marker {
+		    display: none;
+	    }
+    }
+    .list{
+        padding-left: 20px;
+    }
+}
+
+.section_name{
+    font-size: 1.1rem;;
+}
+
+.galery{
+    display: flex;
+    gap: 1.5rem;
+    margin-block: .5rem;
+    .btn{
+        width: 90px;
+        aspect-ratio: 1/1.5;
+        border-radius: 5px;
+        border: 1px solid var(--border-color);
+        .photo{
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+.review{
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    padding: 5px;
+    margin-block: .5rem;
+    .user{
+        display: flex;
+        justify-content: space-between;
+        .name{
+            font-size: 1.1rem;
+        }
+        .date{
+            color: gray;
+        }
+    }
+    .rating{
+        display: flex;
+        gap: .3rem;
+        .star{
+            height: 1.5rem;
+        }
+    }
+}

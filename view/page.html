@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/static/htmx.js"></script>
+    <link href="/static/global.css" rel="stylesheet" />
+    {{template "Head" .}}
+  </head>
+  <body>
+      <nav>
+          <a href="/">
+              <img src="/static/search.svg" class="logo" />
+          </a>
+          <div class="navigation">
+            <button type="button" popovertarget="search">
+                <svg
+                   viewBox="0 0 25.129072 33.866664"
+                   class="logo">
+                  <g
+                     transform="translate(-107.7328,-125.01428)">
+                    <g
+                       transform="matrix(0.40809017,0,0,0.40809017,64.553385,75.055514)">
+                      <circle
+                         style="fill:none;stroke:#000000;stroke-width:8;stroke-dasharray:none;stroke-opacity:1"
+                         cx="135.84032"
+                         cy="153.1218"
+                         r="26.123138" />
+                      <rect
+                         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:8;stroke-dasharray:none"
+                         width="8"
+                         height="32.648464"
+                         x="39.146881"
+                         y="224.89351"
+                         ry="1.7766132"
+                         transform="rotate(-30)" />
+                    </g>
+                  </g>
+                </svg>
+            </button>
+            <a href="/connexion" class="signBtn">Connexion</a>
+          </div>
+          <form id="search" popover action="/recherche" method="GET">
+              <div class="field">
+                  <input type="text" name="content" placeholder="Coiffeur" class="input" autocomplete="off" required />
+                  <div style="position: relative;display: flex;align-items: center;">
+                      <input type="text" name="location" placeholder="Adresse" class="input" autocomplete="off" required oninput="onFetchAddr(this)" />
+                      <button type="button" class="my-position"><img src="/static/location.svg" class="icon" /></button>
+                  </div>
+                  <input type="submit" class="hidden" />
+              </div>
+              <div id="suggest-addr"></div>
+          </form>
+      </nav>
+      <main>
+        {{template "Body" .}}
+      </main>
+      <script>
+          const addrElement = document.getElementById("suggest-addr")
+          let timeout
+          const onFetchAddr = (ele)=>{
+              clearTimeout(timeout)
+              timeout = setTimeout(async ()=>{
+                  const fetchAddr = await fetch(`https://api-adresse.data.gouv.fr/search/?q=${ele.value}&limit=5`)
+                  const addrJson = await fetchAddr.json()
+                  if(!addrJson.features) return
+                  addrElement.innerHTML = ""
+                  for(const addr of addrJson.features){
+                      addrElement.innerHTML += `<div class="suggest">${addr.properties.label}</div>`
+                  }
+              }, 1500)
+          }
+      </script>
+  </body>
+</html>

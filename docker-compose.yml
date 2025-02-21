@@ -1,0 +1,41 @@
+services:
+  db:
+    image: darkvoodoo/appointment-db
+    build: model/
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=darkvoodoo
+      - POSTGRES_DB=appointment
+      - POSTGRES_PASSWORD=1234567
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U darkvoodoo -d job'"]
+      interval: 5s
+      retries: 5
+      timeout: 3s
+  backend:
+    build: .
+    image: darkvoodoo/appointment-back
+    environment:
+      - ACCESS_TOKEN_KEY=5c62b978-2bfc-4cc9-85f6-d48d8f5342dc
+      - REFRESH_TOKEN_KEY=91363ad0-8d0a-400e-bf55-f9f8383235c5
+      - SMTP_PASSWORD=uios zcla rkyp jnzx
+      - DB_NAME=appointment
+      - DB_PASSWORD=1234567
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+  nginx:
+    image: "nginx:1.27.1-alpine"
+    restart: on-failure
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./server.crt:/etc/nginx/server.crt
+      - ./server.key:/etc/nginx/server.key
+    depends_on:
+      - backend

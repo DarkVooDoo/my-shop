@@ -1,0 +1,30 @@
+{{define "Head"}}
+    <title>Mes Rendez-vous</title>
+    <link href="/static/appointment.css" rel="stylesheet" />
+    <style>
+        .header{
+            display: flex;
+            justify-content: space-between;
+            align-items:  center;
+            margin-block: .5rem;
+            .type{
+                height: 2rem;
+                padding-inline: 1rem;
+                border: 1px solid var(--border-color);
+                background-color: transparent;
+            }
+        }
+    </style>
+{{end}}
+
+{{define "Body"}}
+    <div class="header">
+        <h1>Mes Rendez-vous</h1>
+        <select name="type" class="type" hx-get="/rendez-vous" hx-trigger="change" hx-swap="none">
+            <option value="latest">Aujourd'hui</option>
+            <option value="latest">A Venir</option>
+            <option value="oldest">Passée</option>
+        </select>
+    </div>
+    {{template "AppointmentCard" .}}
+{{end}}
